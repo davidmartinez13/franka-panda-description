@@ -4,6 +4,7 @@
   <xacro:arg name="load_gripper"    default="false"/>
   <xacro:arg name="load_hand"       default="false" />
   <xacro:arg name="load_robotiq"       default="false" />
+  <xacro:arg name="load_p2hand"       default="false" />
   <xacro:arg name="realsense"       default="d435" />
 
   <!-- Panda Arm -->
@@ -25,6 +26,10 @@
     <xacro:hand ns="panda" rpy="0 0 ${pi/4}" connected_to="panda_link8"        />
   </xacro:if>
 
+  <!-- Default P2hand -->
+  <xacro:if value="$(arg load_p2hand)">
+    <xacro:include filename="$(find thor_base_left)/urdf/p2hand_left.xacro"/>
+  </xacro:if>
   <!-- Default Robotiq 3f Gripper -->
   <xacro:if value="$(arg load_robotiq)">
     <xacro:include filename="$(find robotiq_3f_gripper_visualization)/cfg/robotiq_hand.xacro"/>
